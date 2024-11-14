@@ -3,13 +3,13 @@ import pickle
 import pandas as pd
 
 # Load saved models and encoders using pickle
-with open('random_forest_model.pkl', 'rb') as f:
+with open('random_forest_agri_model.pkl', 'rb') as f:
     rf_clf = pickle.load(f)
 
-with open("columns_order.pkl", "rb") as f:
+with open("columns_order_agri.pkl", "rb") as f:
     encoded_columns = pickle.load(f)
 
-with open('scaler.pkl', 'rb') as f:
+with open('scaler_agri.pkl', 'rb') as f:
     scaler = pickle.load(f)
 
 # Load your dataset to read unique categorical values (assuming you have a dataset)
