@@ -25,9 +25,6 @@ with open('soil_encoder.pkl', 'rb') as f:
 with open('season_encoder.pkl', 'rb') as f:
     season_encoder = pickle.load(f)
 
-# Identify categorical columns
-cat_cols = ['Crop_Type', 'Irrigation_Type', 'Soil_Type', 'Season']
-
 # Set the title of the app
 st.title("AI-Based Agricultural Yield Forecasting and Optimization")
 
@@ -39,9 +36,11 @@ if st.session_state.page == 'input':
     # Create a dictionary to store user inputs
     user_input = {}
 
-    # Loop over each categorical column and create a dynamic selectbox
-    for column in cat_cols:
-        user_input[column] = st.selectbox(f"Select {column}", options=eval(f'{column}_encoder.classes_'))
+    # Manually provide the options for the categorical columns based on the encoders
+    user_input['Crop_Type'] = st.selectbox("Select Crop Type", options=crop_encoder.classes_)
+    user_input['Irrigation_Type'] = st.selectbox("Select Irrigation Type", options=irrigation_encoder.classes_)
+    user_input['Soil_Type'] = st.selectbox("Select Soil Type", options=soil_encoder.classes_)
+    user_input['Season'] = st.selectbox("Select Season", options=season_encoder.classes_)
 
     # Add numerical inputs (e.g., for area, rainfall, etc.)
     user_input['Farm_Area(acres)'] = st.number_input("Enter Farm Area (in acres)", min_value=1, step=1)
