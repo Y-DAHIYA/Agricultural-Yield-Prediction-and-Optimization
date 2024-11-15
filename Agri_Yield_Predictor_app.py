@@ -12,28 +12,16 @@ with open("columns_order_agri.pkl", "rb") as f:
 with open('scaler_agri.pkl', 'rb') as f:
     scaler = pickle.load(f)
 
-# Load your dataset to read unique categorical values (assuming you have a dataset)
-# data = pd.read_csv('C:/Users/JDPK/Downloads/agriculture_dataset.csv')
-# data = pd.read_csv('https://github.com/Y-DAHIYA/Agricultural-Yield-Prediction-and-Optimization/blob/main/agriculture_dataset.csv')
-
-# Attempt to read the CSV file with additional parameters
-try:
-    data = pd.read_csv(
-        'https://github.com/Y-DAHIYA/Agricultural-Yield-Predictor/raw/main/agriculture_dataset.csv',
-        sep=',',  # Ensure comma is the separator
-        encoding='utf-8',  # Adjust if needed based on file encoding
-        on_bad_lines='skip'  # Skip lines with errors
-    )
-    st.write("Data loaded successfully!")
-except Exception as e:
-    st.error(f"Error loading data: {e}")
-
-
-if 'Farm_ID' in data.columns:
-    data = data.drop('Farm_ID', axis=1)
+# Define unique categorical values manually based on your data distribution
+unique_values_dict = {
+    'Crop_Type': ['Cotton', 'Barley', 'Tomato', 'Rice', 'Soybean', 'Sugarcane', 'Carrot', 'Wheat', 'Potato', 'Maize'],
+    'Irrigation_Type': ['Drip', 'Flood', 'Sprinkler', 'Rain-fed', 'Manual'],
+    'Soil_Type': ['Clay', 'Loamy', 'Sandy', 'Silty', 'Peaty'],
+    'Season': ['Zaid', 'Kharif', 'Rabi']
+}
 
 # Identify categorical columns
-cat_cols = data.select_dtypes(exclude=['int64', 'float64']).columns.tolist()
+cat_cols = list(unique_values_dict.keys())
 
 # Set the title of the app
 st.title("AI-Based Agricultural Yield Forecasting and Optimization")
@@ -48,8 +36,7 @@ if st.session_state.page == 'input':
 
     # Loop over each categorical column and create a dynamic selectbox
     for column in cat_cols:
-        unique_values = data[column].unique()
-        user_input[column] = st.selectbox(f"Select {column}", options=unique_values)
+        user_input[column] = st.selectbox(f"Select {column}", options=unique_values_dict[column])
 
     # Add numerical inputs (e.g., for area, rainfall, etc.)
     user_input['Farm_Area(acres)'] = st.number_input("Enter Farm Area (in acres)", min_value=1, step=1)
