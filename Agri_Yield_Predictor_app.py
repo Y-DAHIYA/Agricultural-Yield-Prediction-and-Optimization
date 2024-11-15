@@ -13,7 +13,8 @@ with open('scaler_agri.pkl', 'rb') as f:
     scaler = pickle.load(f)
 
 # Load your dataset to read unique categorical values (assuming you have a dataset)
-data = pd.read_csv('C:/Users/JDPK/Downloads/agriculture_dataset.csv')
+# data = pd.read_csv('C:/Users/JDPK/Downloads/agriculture_dataset.csv')
+data = pd.read_csv('https://github.com/Y-DAHIYA/Agricultural-Yield-Prediction-and-Optimization/blob/main/agriculture_dataset.csv')
 
 if 'Farm_ID' in data.columns:
     data = data.drop('Farm_ID', axis=1)
