@@ -12,16 +12,21 @@ with open("columns_order_agri.pkl", "rb") as f:
 with open('scaler_agri.pkl', 'rb') as f:
     scaler = pickle.load(f)
 
-# Define unique categorical values manually based on your data distribution
-unique_values_dict = {
-    'Crop_Type': ['Cotton', 'Barley', 'Tomato', 'Rice', 'Soybean', 'Sugarcane', 'Carrot', 'Wheat', 'Potato', 'Maize'],
-    'Irrigation_Type': ['Drip', 'Flood', 'Sprinkler', 'Rain-fed', 'Manual'],
-    'Soil_Type': ['Clay', 'Loamy', 'Sandy', 'Silty', 'Peaty'],
-    'Season': ['Zaid', 'Kharif', 'Rabi']
-}
+# Load individual encoders
+with open('crop_encoder.pkl', 'rb') as f:
+    crop_encoder = pickle.load(f)
+
+with open('irrigation_encoder.pkl', 'rb') as f:
+    irrigation_encoder = pickle.load(f)
+
+with open('soil_encoder.pkl', 'rb') as f:
+    soil_encoder = pickle.load(f)
+
+with open('season_encoder.pkl', 'rb') as f:
+    season_encoder = pickle.load(f)
 
 # Identify categorical columns
-cat_cols = list(unique_values_dict.keys())
+cat_cols = ['Crop_Type', 'Irrigation_Type', 'Soil_Type', 'Season']
 
 # Set the title of the app
 st.title("AI-Based Agricultural Yield Forecasting and Optimization")
@@ -36,7 +41,7 @@ if st.session_state.page == 'input':
 
     # Loop over each categorical column and create a dynamic selectbox
     for column in cat_cols:
-        user_input[column] = st.selectbox(f"Select {column}", options=unique_values_dict[column])
+        user_input[column] = st.selectbox(f"Select {column}", options=eval(f'{column}_encoder.classes_'))
 
     # Add numerical inputs (e.g., for area, rainfall, etc.)
     user_input['Farm_Area(acres)'] = st.number_input("Enter Farm Area (in acres)", min_value=1, step=1)
@@ -64,9 +69,15 @@ if st.session_state.page == 'prediction':
         # Convert user input into a DataFrame
         user_input_df = pd.DataFrame(user_input, index=[0])
 
-        # Encoding the categorical features based on the input data
-        user_input_encoded = pd.get_dummies(user_input_df, columns=cat_cols, drop_first=True)
+        # Encoding the categorical features using the LabelEncoder
+        user_input['Crop_Type'] = crop_encoder.transform([user_input['Crop_Type']])[0]
+        user_input['Irrigation_Type'] = irrigation_encoder.transform([user_input['Irrigation_Type']])[0]
+        user_input['Soil_Type'] = soil_encoder.transform([user_input['Soil_Type']])[0]
+        user_input['Season'] = season_encoder.transform([user_input['Season']])[0]
 
+        # Convert the user input to a DataFrame again for prediction
+        user_input_encoded = pd.DataFrame(user_input, index=[0])
+        
         # Ensure the columns match the trained model's features by reindexing
         user_input_encoded = user_input_encoded.reindex(columns=encoded_columns, fill_value=0)
 
@@ -88,4 +99,4 @@ if st.session_state.page == 'prediction':
         # Optionally, a button to go back to input page
         if st.button("Go back to Input Page"):
             st.session_state.page = 'input'
-            st.rerun()  # Refresh the app to go back to the input page
+            # st.rerun()  # Refresh the app to go back to the input page
