@@ -14,7 +14,20 @@ with open('scaler_agri.pkl', 'rb') as f:
 
 # Load your dataset to read unique categorical values (assuming you have a dataset)
 # data = pd.read_csv('C:/Users/JDPK/Downloads/agriculture_dataset.csv')
-data = pd.read_csv('https://github.com/Y-DAHIYA/Agricultural-Yield-Prediction-and-Optimization/blob/main/agriculture_dataset.csv')
+# data = pd.read_csv('https://github.com/Y-DAHIYA/Agricultural-Yield-Prediction-and-Optimization/blob/main/agriculture_dataset.csv')
+
+# Attempt to read the CSV file with additional parameters
+try:
+    data = pd.read_csv(
+        'https://github.com/Y-DAHIYA/Agricultural-Yield-Predictor/raw/main/agriculture_dataset.csv',
+        sep=',',  # Ensure comma is the separator
+        encoding='utf-8',  # Adjust if needed based on file encoding
+        on_bad_lines='skip'  # Skip lines with errors
+    )
+    st.write("Data loaded successfully!")
+except Exception as e:
+    st.error(f"Error loading data: {e}")
+
 
 if 'Farm_ID' in data.columns:
     data = data.drop('Farm_ID', axis=1)
