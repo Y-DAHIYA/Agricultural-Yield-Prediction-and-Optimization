@@ -1,94 +1,150 @@
-🌾 Agriculture Yield Prediction Web App
+# 🌾 Agriculture Yield Prediction Web App
 
-📌 Description
-The Agriculture Yield Prediction Web App is a machine learning-powered tool that predicts the expected crop yield per hectare based on key inputs such as crop type, temperature, rainfall, and pesticide usage. Designed using Streamlit, this app allows farmers, researchers, and policymakers to make informed decisions about crop planning and resource allocation.
+## 📌 Description
 
-🚀 Try the App Live
-👉 Click Here to Use the App
+The **Agriculture Yield Prediction Web App** is a machine learning-powered tool that predicts the expected crop yield (tons per hectare) based on key inputs such as crop type, temperature, rainfall, and pesticide usage. Built using Streamlit, it helps farmers, researchers, and policymakers make informed decisions about crop planning and resource allocation.
 
-✨ Features
-📊 Predict yield for different crops based on environmental factors
+---
 
-🔍 User-friendly interface for input and instant predictions
+## 🚀 Live Demo
 
-📈 Trained using Random Forest Regression
+👉 **[Click Here to Use the App](#)**  
+*(Replace the link with your deployed Streamlit app URL.)*
 
-🧠 Option to retrain the model with new data
+---
 
-💾 Supports CSV input for batch predictions
+## ✨ Features
 
-🛠️ Tech Stack
-Tool	Purpose
-Python	Core Programming
-Pandas, NumPy	Data Handling
-Scikit-learn	Machine Learning
-Streamlit	Web App UI
-Matplotlib & Seaborn	Data Visualization
-PIL	Image Processing
-📷 Screenshots
-🎯 Home Page:
+- **Instant Yield Prediction:** Enter inputs to get real-time crop yield predictions.
+- **User-friendly Interface:** Designed with an intuitive Streamlit UI.
+- **Model Retraining:** Option to retrain the model with new data.
+- **Batch Predictions:** Supports CSV input for multiple predictions.
+- **Robust ML Models:** Built with Random Forest Regression, Gradient Boosting, and Linear Regression.
 
-🧮 Prediction Page:
+---
 
-📈 Model Metrics:
+## 📊 Dataset Overview
 
-🗂️ Dataset Info
-The app uses a cleaned and preprocessed dataset with the following features:
+| Feature Name         | Description                                          |
+|----------------------|------------------------------------------------------|
+| **Farm_ID**          | Unique identifier (dropped during preprocessing)     |
+| **Crop_Type**        | Type of crop grown (categorical)                      |
+| **Soil_Type**        | Soil classification (categorical)                     |
+| **Irrigation_Type**  | Irrigation method used (categorical)                  |
+| **Season**           | Season during cultivation (categorical)               |
+| **Farm_Area**        | Farm size (in acres)                                  |
+| **Fertilizer_Used**  | Amount of fertilizer used (in tons)                   |
+| **Pesticide_Used**   | Pesticide quantity (in kg)                            |
+| **Water_Usage**      | Water consumption (in cubic meters)                   |
+| **Yield**            | Crop yield (target variable, in tons)                 |
 
-Crop — Type of crop
+---
 
-Temperature — Average annual temperature (°C)
+## 🔍 Exploratory Data Analysis (EDA)
 
-Rainfall — Annual rainfall (mm)
+- **Missing Value Checks:** Identified and handled missing data.
+- **Categorical Analysis:** Used `value_counts` for class distribution.
+- **Numerical Analysis:** Visualized data with histograms and boxplots.
+- **Outlier Detection:** Employed the IQR method to detect outliers.
+- **Correlation Analysis:** Created heatmaps to identify multicollinearity.
+- **Visual Insights:** Pairplots and distribution plots provided additional insights.
 
-Pesticide Usage — kg per hectare
+---
 
-Yield — Target variable (kg/hectare)
+## 🔧 Data Preprocessing
 
-💻 How to Run Locally
-bash
-Copy
-Edit
-# Clone the repo
-git clone https://github.com/yourusername/agriculture-yield-app.git
-cd agriculture-yield-app
+- **Dropped Columns:** Removed `Farm_ID` as it is non-informative.
+- **Encoding:** Applied `LabelEncoder` on categorical variables:
+  - `Crop_Type`
+  - `Soil_Type`
+  - `Irrigation_Type`
+  - `Season`
+- **Scaling:** Standardized numerical features using `StandardScaler`.
+- **Train-Test Split:** Data split into an 80/20 ratio for training and testing.
 
-# Create and activate virtual environment (optional)
-python -m venv venv
-source venv/bin/activate  # On Windows use venv\Scripts\activate
+---
 
-# Install requirements
-pip install -r requirements.txt
+## 🤖 Machine Learning Models
 
-# Run the app
-streamlit run app.py
-📦 Deployment
-The app is deployed using Streamlit Cloud. You can deploy yours using:
+### ✅ Models Evaluated
 
-Push your code to GitHub
+- **Linear Regression**
+- **Random Forest Regressor**
+- **Gradient Boosting Regressor**
 
-Go to Streamlit Community Cloud
+### 📈 Evaluation Metrics
 
-Connect your GitHub repo and deploy
+- **R² Score**
+- **Mean Squared Error (MSE)**
+- **Root Mean Squared Error (RMSE)**
+- **Mean Absolute Error (MAE)**
 
-🧠 Machine Learning Model
-Algorithm: Random Forest Regressor
+---
 
-Evaluation Metric: R² Score
+## 🛠️ Hyperparameter Tuning
 
-Model Accuracy: ~90% on test data
+Used **GridSearchCV** to optimize model performance:
 
-🙋‍♂️ Author
-👨‍💻 Yash
-Data Analyst & Python Developer
-🔗 LinkedIn | 🌐 Portfolio
+- **Random Forest Regressor:**
+  ```python
+  {
+    'n_estimators': 200,
+    'max_depth': 10,
+    'min_samples_split': 10
+  }
 
-📚 Lessons Learned
-Learned how to build interactive UI with Streamlit
+## 🔁 Cross Validation
+Performed 5-Fold Cross-Validation to ensure model robustness and prevent overfitting.
 
-Understood the full ML pipeline: preprocessing → training → prediction
+---
 
-Gained experience in deploying ML models to the web
+## 🏆 Final Model Performance (After Tuning)
+| Model                         | R² Score | RMSE  | MAE   |
+|-------------------------------|----------|-------|-------|
+| Random Forest Regressor       | -0.00    | 12.64 | 10.52 |
+| Gradient Boosting Regressor   | -0.10    | 13.23 | 11.42 |
 
-Practiced building user-focused features with real-world impact
+**Note:** The low R² scores suggest there is room for improvement. This could be due to data limitations, noise, or the need for additional features.
 
+---
+
+## 📦 Output Artifacts
+- **random_forest_agri_model.pkl:** Final trained Random Forest model.
+- **scaler_agri.pkl:** Fitted StandardScaler for numerical features.
+- **Label Encoders:**
+  - crop_encoder.pkl
+  - soil_encoder.pkl
+  - irrigation_encoder.pkl
+  - season_encoder.pkl
+
+---
+
+## 📚 Tools & Libraries
+- **Python**
+- **Pandas & NumPy** – Data manipulation
+- **Matplotlib & Seaborn** – Data visualization
+- **Scikit-learn** – Machine learning, preprocessing, and evaluation
+- **Statsmodels** – For VIF analysis to check multicollinearity
+- **Pickle** – Model serialization
+- **Streamlit** – Web app framework
+
+---
+
+## 📬 Contact
+- **Author:** Yash
+- **Email:** [yd811822@gmail.com](yd811822@gmail.com)
+- **LinkedIn** (https://www.linkedin.com/in/yashcoding/)
+
+---
+
+## ✅ Lessons Learned
+- **Feature Engineering:** Effective encoding and scaling significantly impact model performance.
+- **Modeling Insights:** Even slight performance differences can highlight potential areas for improvement.
+- **Data Visualization:** Critical for identifying outliers, skewness, and feature correlations.
+- **Domain Expertise:** In-depth agricultural knowledge can drive better feature selection.
+- **Model Evaluation:** Cross-validation and hyperparameter tuning are key to enhancing generalizability.
+
+---
+
+### Streamlit App UI
+![Image](https://github.com/user-attachments/assets/6c3754b9-2ff1-4586-9e59-d3a5ffd73383)
