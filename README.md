@@ -8,7 +8,7 @@ The **Agriculture Yield Prediction Web App** is a machine learning-powered tool 
 
 ## 🚀 Live Demo
 
-👉 **[Click Here to Use the App](#)**  
+👉 **[Click Here to Use the App](https://btop6kdb68bjhqupheccjm.streamlit.app/)**  
 *(Replace the link with your deployed Streamlit app URL.)*
 
 ---
@@ -132,8 +132,8 @@ Performed 5-Fold Cross-Validation to ensure model robustness and prevent overfit
 
 ## 📬 Contact
 - **Author:** Yash
-- [**Email**] (yd811822@gmail.com)
-- [**LinkedIn**] (https://www.linkedin.com/in/yashcoding/)
+- [**Email(yd811822@gmail.com)**] 
+- [**LinkedIn(https://www.linkedin.com/in/yashcoding/)**] 
 
 ---
 
