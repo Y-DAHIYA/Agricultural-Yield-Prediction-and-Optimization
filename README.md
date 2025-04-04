@@ -162,5 +162,6 @@ Performed 5-Fold Cross-Validation to ensure model robustness and prevent overfit
 
 ---
 
-### Streamlit App UI
+## Streamlit App UI
+
 ![Image](https://github.com/user-attachments/assets/6c3754b9-2ff1-4586-9e59-d3a5ffd73383)
