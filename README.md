@@ -8,8 +8,7 @@ The **Agriculture Yield Prediction Web App** is a machine learning-powered tool 
 
 ## 🚀 Live Demo
 
-👉 **[Click Here to Use the App](https://btop6kdb68bjhqupheccjm.streamlit.app/)**  
-*(Replace the link with your deployed Streamlit app URL.)*
+👉 **[Click Here to Use the App](https://btop6kdb68bjhqupheccjm.streamlit.app/)** 
 
 ---
 
@@ -81,6 +80,15 @@ The **Agriculture Yield Prediction Web App** is a machine learning-powered tool 
 
 ---
 
+## 🏆 Results
+| Model                         | R² Score | MSE  | RMSE  | MAE   |
+|-------------------------------|----------|------|-------|-------|
+| Linear Regression       | 0.00    | 159.59 | 12.63 | 10.63 |
+| Random Forest Regressor   | -0.13    | 180.33 | 13.43 | 10.89 |
+| Gradient Boosting Regressor   | -0.70    | 270.75 | 16.45 | 14.27 |
+
+---
+
 ## 🛠️ Hyperparameter Tuning
 
 Used **GridSearchCV** to optimize model performance:
@@ -92,17 +100,25 @@ Used **GridSearchCV** to optimize model performance:
     'max_depth': 10,
     'min_samples_split': 10
   }
-
+  
+- **Gradient Boosting:**
+  ```python
+  {
+    'learning_rate': 0.01
+    'max_depth': 7,
+    'n_estimators': 50
+  }
+  
 ## 🔁 Cross Validation
 Performed 5-Fold Cross-Validation to ensure model robustness and prevent overfitting.
 
 ---
 
 ## 🏆 Final Model Performance (After Tuning)
-| Model                         | R² Score | RMSE  | MAE   |
-|-------------------------------|----------|-------|-------|
-| Random Forest Regressor       | -0.00    | 12.64 | 10.52 |
-| Gradient Boosting Regressor   | -0.10    | 13.23 | 11.42 |
+| Model                         | R² Score | MSE  | RMSE  | MAE   |
+|-------------------------------|----------|------|-------|-------|
+| Random Forest Regressor       | -0.00    | 159.75 | 12.64 | 10.52 |
+| Gradient Boosting Regressor   | -0.10    | 175.01 | 13.23 | 11.42 |
 
 **Note:** The low R² scores suggest there is room for improvement. This could be due to data limitations, noise, or the need for additional features.
 
