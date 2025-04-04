@@ -132,8 +132,8 @@ Performed 5-Fold Cross-Validation to ensure model robustness and prevent overfit
 
 ## 📬 Contact
 - **Author:** Yash
-- [**Email(yd811822@gmail.com)**] 
-- [**LinkedIn(https://www.linkedin.com/in/yashcoding/)**] 
+- **[Email](yd811822@gmail.com)** 
+- **[LinkedIn](https://www.linkedin.com/in/yashcoding/)** 
 
 ---
 
